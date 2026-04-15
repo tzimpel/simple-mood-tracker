@@ -1,20 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Mood Tracker</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Mood Tracker</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="content-wrapper">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Log Your Mood</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="full">
+          <ion-label position="stacked">Current Date / Time</ion-label>
+          <ion-datetime
+            hour-cycle="h12"
+            presentation="date-time"
+            [(ngModel)]="currentDateTime"
+            (ngModelChange)="onFormChange()"
+          ></ion-datetime>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Current Mood</ion-label>
+          <ion-range
+            aria-label="Current Mood"
+            [min]="0"
+            [max]="10"
+            [pin]="true"
+            [snaps]="true"
+            [ticks]="true"
+            step="1"
+            [(ngModel)]="currentMood"
+            (ngModelChange)="onFormChange()"
+          >
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">10</ion-label>
+          </ion-range>
+          <ion-note color="medium">Selected mood: {{ currentMood }}</ion-note>
+        </ion-item>
+
+        <ion-text color="success" *ngIf="isSaved">
+          <p class="save-message">Entry saved.</p>
+        </ion-text>
+
+        <ion-button expand="block" (click)="saveEntry()">Save</ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
