@@ -1,0 +1,7 @@
+{
+  "name": "Simple Mood Tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
